@@ -3,8 +3,6 @@ Add-Type -AssemblyName System.Windows.Forms
 
 $ErrorActionPreference = 'SilentlyContinue'
 $wshell = New-Object -ComObject Wscript.Shell
-$Button = [System.Windows.MessageBoxButton]::YesNoCancel
-$ErrorIco = [System.Windows.MessageBoxImage]::Error
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
 	Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
 	Exit
@@ -979,9 +977,6 @@ $essentialtweaks.Add_Click({
     Write-Host "Hiding 3D Objects icon from This PC..."
     Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" -Recurse -ErrorAction SilentlyContinue
 
-	# Network Tweaks
-	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "IRPStackSize" -Type DWord -Value 20
-
     # Group svchost.exe processes
     $ram = (Get-CimInstance -ClassName Win32_PhysicalMemory | Measure-Object -Property Capacity -Sum).Sum / 1kb
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "SvcHostSplitThresholdInKB" -Type DWord -Value $ram -Force
@@ -1035,7 +1030,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     #"WlanSvc"                                      # WLAN AutoConfig
     "WMPNetworkSvc"                                # Windows Media Player Network Sharing Service
     #"wscsvc"                                       # Windows Security Center Service
-    "WSearch"                                      # Windows Search
+    # "WSearch"                                      # Windows Search
     "XblAuthManager"                               # Xbox Live Auth Manager
     "XblGameSave"                                  # Xbox Live Game Save Service
     "XboxNetApiSvc"                                # Xbox Live Networking Service
@@ -1081,14 +1076,14 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     #"p2psvc"                                       # Disbales Peer Name Resolution Protocol(nables multi-party communication using Peer-to-Peer Grouping.  If disabled, some applications, such as HomeGroup, may not function. Discord will still work)
     #"p2pimsvc"                                     # Disables Peer Networking Identity Manager (Peer-to-Peer Grouping services may not function, and some applications, such as HomeGroup and Remote Assistance, may not function correctly.Discord will still work)
     "PerfHost"                                      #Disables  remote users and 64-bit processes to query performance .
-    "BcastDVRUserService_48486de"                   #Disables GameDVR and Broadcast   is used for Game Recordings and Live Broadcasts
-    "CaptureService_48486de"                        #Disables ptional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
-    "cbdhsvc_48486de"                               #Disables   cbdhsvc_48486de (clipboard service it disables)
+    "BcastDVRUserService"                   #Disables GameDVR and Broadcast   is used for Game Recordings and Live Broadcasts
+    # "CaptureService"                        #Disables ptional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
+    "cbdhsvc"                               #Disables   cbdhsvc_48486de (clipboard service it disables)
     #"BluetoothUserService_48486de"                  #disbales BluetoothUserService_48486de (The Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.)
     "WpnService"                                    #Disables WpnService (Push Notifications may not work )
     #"StorSvc"                                       #Disables StorSvc (usb external hard drive will not be reconised by windows)
     "RtkBtManServ"                                  #Disables Realtek Bluetooth Device Manager Service
-    "QWAVE"                                         #Disables Quality Windows Audio Video Experience (audio and video might sound worse)
+    # "QWAVE"                                         #Disables Quality Windows Audio Video Experience (audio and video might sound worse)
      #Hp services
     "HPAppHelperCap"
     "HPDiagsCap"
@@ -1216,7 +1211,7 @@ $essentialundo.Add_Click({
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 1
 
     Write-Host "Changing default Explorer view to Quick Access..."
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
 
     Write-Host "Unrestricting AutoLogger directory"
     $autoLoggerDir = "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\AutoLogger"
@@ -1327,7 +1322,7 @@ $windowssearch.Add_Click({
 
 $backgroundapps.Add_Click({
     Write-Host "Disabling Background application access..."
-    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
+    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
         Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
         Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
     }
@@ -1441,7 +1436,7 @@ $Bloatware = @(
     "*HotspotShieldFreeVPN*"
 
     #Optional: Typically not removed but you can if you need to for some reason
-    "*Microsoft.Advertising.Xaml*"
+    # "*Microsoft.Advertising.Xaml*"
     #"*Microsoft.MSPaint*"
     #"*Microsoft.MicrosoftStickyNotes*"
     #"*Microsoft.Windows.Photos*"
@@ -1680,7 +1675,7 @@ $ELocation.Add_Click({
 
 $RBackgroundApps.Add_Click({
 	Write-Host "Allowing Background Apps..."
-	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
+	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
 		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
@@ -1722,7 +1717,7 @@ $yourphonefix.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableCdp" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Messaging" -Name "AllowMessageSync" -Type DWord -Value 1
     Write-Host "Allowing Background Apps..."
-	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
+	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
 		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
