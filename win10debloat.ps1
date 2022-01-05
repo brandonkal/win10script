@@ -18,12 +18,10 @@ if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
 else{
     # Installing winget from the Microsoft Store
 	Write-Host "Winget not found, installing it now."
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
 	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
 	$nid = (Get-Process AppInstaller).Id
 	Wait-Process -Id $nid
 	Write-Host Winget Installed
-    $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
@@ -531,12 +529,6 @@ $windowsupdatefix.height         = 30
 $windowsupdatefix.location       = New-Object System.Drawing.Point(4,59)
 $windowsupdatefix.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$ResultText                      = New-Object system.Windows.Forms.TextBox
-$ResultText.multiline            = $true
-$ResultText.width                = 382
-$ResultText.height               = 130
-$ResultText.location             = New-Object System.Drawing.Point(576,491)
-$ResultText.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label10                         = New-Object system.Windows.Forms.Label
 $Label10.text                    = "Current Status:"
@@ -617,7 +609,6 @@ $Button1.height                  = 30
 $Button1.location                = New-Object System.Drawing.Point(4,197)
 $Button1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
@@ -625,104 +616,78 @@ $Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldco
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Brave... Please Wait" 
     winget install -e BraveSoftware.BraveBrowser | Out-Host
     if($?) { Write-Host "Installed Brave Browser" }
-    $ResultText.text = "`r`n" + "Finished Installing Brave" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $firefox.Add_Click({
     Write-Host "Installing Firefox"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Firefox... Please Wait" 
     winget install -e Mozilla.Firefox | Out-Host
     if($?) { Write-Host "Installed Firefox" }
-    $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $gchrome.Add_Click({
     Write-Host "Installing Google Chrome"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Google Chrome... Please Wait" 
     winget install -e Google.Chrome | Out-Host
     if($?) { Write-Host "Installed Google Chrome" }
-    $ResultText.text = "`r`n" + "Finished Installing Google Chrome" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $autohotkey.Add_Click({
     Write-Host "Installing AutoHotkey"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing AutoHotkey... Please Wait" 
     winget install -e Lexikos.AutoHotkey | Out-Host
     if($?) { Write-Host "Installed AutoHotkey" }
-    $ResultText.text = "`r`n" + "Finished Installing Autohotkey" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 $imageglass.Add_Click({
     Write-Host "Installing Image Glass (Image Viewer)"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Image Glass... Please Wait" 
     winget install -e DuongDieuPhap.ImageGlass | Out-Host
     if($?) { Write-Host "Installed Image Glass (Image Viewer)" }
-    $ResultText.text = "`r`n" + "Finished Installing Image Glass" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 $discord.Add_Click({
     Write-Host "Installing Discord"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Discord... Please Wait" 
     winget install -e Discord.Discord | Out-Host
     if($?) { Write-Host "Installed Discord" }
-    $ResultText.text = "`r`n" + "Finished Installing Discord" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $adobereader.Add_Click({
     Write-Host "Installing Adobe Reader DC"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Adobe Reader DC... Please Wait" 
     winget install -e Adobe.AdobeAcrobatReaderDC | Out-Host
     if($?) { Write-Host "Installed Adobe Reader DC" }
-    $ResultText.text = "`r`n" + "Finished Installing Adobe Reader DC" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $notepad.Add_Click({
     Write-Host "Installing Notepad++"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Notepad++... Please Wait" 
     winget install -e Notepad++.Notepad++ | Out-Host
     if($?) { Write-Host "Installed Notepad++" }
-    $ResultText.text = "`r`n" + "Finished Installing NotePad++" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $vlc.Add_Click({
     Write-Host "Installing VLC Media Player"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing VLC Media Player... Please Wait" 
     winget install -e VideoLAN.VLC | Out-Host
     if($?) { Write-Host "Installed VLC Media Player" }
-    $ResultText.text = "`r`n" + "Finished Installing VLC Media Player" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $mpc.Add_Click({
     Write-Host "Installing Media Player Classic"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Media Player Classic... Please Wait" 
     winget install -e clsid2.mpc-hc | Out-Host
     if($?) { Write-Host "Installed Media Player Classic" }
-    $ResultText.text = "`r`n" + "Finished Installing Media Player Classic" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $7zip.Add_Click({
     Write-Host "Installing 7-Zip Compression Tool"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing 7-Zip Compression Tool... Please Wait" 
     winget install -e 7zip.7zip | Out-Host
     if($?) { Write-Host "Installed 7-Zip Compression Tool" }
-    $ResultText.text = "`r`n" + "Finished Installing 7-Zip Compression Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $vscode.Add_Click({
     Write-Host "Installing Visual Studio Code"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Visual Studio Code... Please Wait" 
     winget install -e Microsoft.VisualStudioCode --source winget | Out-Host
     if($?) { Write-Host "Installed Visual Studio Code" }
-    $ResultText.text = "`r`n" + "Finished Installing Visual Studio Code" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $vscodium.Add_Click({
     Write-Host "Installing VS Codium"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing VS Codium... Please Wait" 
     winget install -e VSCodium.VSCodium | Out-Host
     if($?) { Write-Host "Installed VS Codium" }
-    $ResultText.text = "`r`n" + "Finished Installing VS Codium" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $urlremovevirus.Add_Click({
@@ -739,108 +704,83 @@ $urlcreateiso.Add_Click({
 
 $winterminal.Add_Click({
     Write-Host "Installing New Windows Terminal"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing New Windows Terminal... Please Wait" 
     winget install -e Microsoft.WindowsTerminal | Out-Host
     if($?) { Write-Host "Installed New Windows Terminal" }
-    $ResultText.text = "`r`n" + "Finished Installing New Windows Terminal" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $powertoys.Add_Click({
     Write-Host "Installing Microsoft PowerToys"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Microsoft PowerToys... Please Wait" 
     winget install -e Microsoft.PowerToys | Out-Host
     if($?) { Write-Host "Installed Microsoft PowerToys" }
-    $ResultText.text = "`r`n" + "Finished Installing Microsoft PowerToys" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $everythingsearch.Add_Click({
     Write-Host "Installing Voidtools Everything Search"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Voidtools Everything Search... Please Wait" 
     winget install -e voidtools.Everything --source winget | Out-Host
     if($?) { Write-Host "Installed Everything Search" }
-    $ResultText.text = "`r`n" + "Finished Installing Voidtools Everything Search" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $sumatrapdf.Add_Click({
     Write-Host "Installing Sumatra PDF"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Sumatra PDF... Please Wait" 
     winget install -e SumatraPDF.SumatraPDF | Out-Host
     if($?) { Write-Host "Installed Sumatra PDF" }
-    $ResultText.text = "`r`n" + "Finished Installing Sumatra PDF" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $githubdesktop.Add_Click({
     Write-Host "Installing GitHub Desktop"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing GitHub Desktop... Please Wait" 
     winget install -e GitHub.GitHubDesktop | Out-Host
     Write-Host "Installed Github Desktop"
-    $ResultText.text = "`r`n" + "Finished Installing GitHub Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $translucenttb.Add_Click({
     Write-Host "Installing Translucent Taskbar"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Translucent Taskbar... Please Wait" 
     winget install -e TranslucentTB.TranslucentTB | Out-Host
     Write-Host "Installed Translucent Taskbar"
-    $ResultText.text = "`r`n" + "Finished Installing Translucent Taskbar" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $etcher.Add_Click({
     Write-Host "Installing Etcher USB Imager"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Etcher USB Imager... Please Wait" 
     winget install -e Balena.Etcher | Out-Host
     Write-Host "Installed Etcher USB Imager"
-    $ResultText.text = "`r`n" + "Finished Installing Etcher USB Imager" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $putty.Add_Click({
     Write-Host "Installing PuTTY & WinSCP"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing PuTTY & WinSCP... Please Wait" 
     winget install -e PuTTY.PuTTY | Out-Host
     winget install -e WinSCP.WinSCP | Out-Host
     Write-Host "Installed PuTTY & WinSCP"
-    $ResultText.text = "`r`n" + "Finished Installing PuTTY & WinSCP" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $advancedipscanner.Add_Click({
     Write-Host "Installing Advanced IP Scanner"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Advanced IP Scanner... Please Wait" 
     winget install -e Famatech.AdvancedIPScanner | Out-Host
     Write-Host "Installed Advanced IP Scanner"
-    $ResultText.text = "`r`n" + "Finished Installing Advanced IP Scanner" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $sharex.Add_Click({
     Write-Host "Installing ShareX Screenshot Tool"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing ShareX Screenshot Tool... Please Wait" 
     winget install -e ShareX.ShareX | Out-Host
     Write-Host "Installed ShareX Screenshot Tool"
-    $ResultText.text = "`r`n" + "Finished Installing ShareX Screenshot Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $gimp.Add_Click({
     Write-Host "Installing Gimp Image Editor"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Gimp Image Editor... Please Wait" 
     winget install -e GIMP.GIMP | Out-Host
     Write-Host "Installed Gimp Image Editor"
-    $ResultText.text = "`r`n" + "Finished Installing Gimp Image Editor" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $essentialtweaks.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Essential Tools... Please Wait" 
     Enable-ComputerRestore -Drive "C:\"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
     Write-Host "Running O&O Shutup with Recommended Settings"
-    $ResultText.text += "`r`n" +"Running O&O Shutup with Recommended Settings"
     Import-Module BitsTransfer
     Start-BitsTransfer -Source "https://raw.githubusercontent.com/brandonkal/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
     Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
     ./OOSU10.exe ooshutup10.cfg /quiet
 
     Write-Host "Disabling Telemetry..."
-    $ResultText.text += "`r`n" +"Disabling Telemetry..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" | Out-Null
@@ -971,7 +911,6 @@ $essentialtweaks.Add_Click({
     }
 
     Write-Host "Changing default Explorer view to This PC..."
-    $ResultText.text += "`r`n" +"Quality of Life Tweaks"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
 
     Write-Host "Hiding 3D Objects icon from This PC..."
@@ -985,7 +924,6 @@ $essentialtweaks.Add_Click({
 	#Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
 
     Write-Host "Disable News and Interests"
-    $ResultText.text += "`r`n" +"Disabling Extra Junk"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
     # Remove "News and Interest" from taskbar
     Set-ItemProperty -Path  "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds" -Name "ShellFeedsTaskbarViewMode" -Type DWord -Value 2
@@ -1111,18 +1049,10 @@ foreach ($service in $services) {
 }
 
     Write-Host "Essential Tweaks Completed - Please Reboot"
-    $ResultText.text = "`r`n" + "Essential Tweaks Done" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$dualboottime.Add_Click({
-Write-Host "Setting BIOS time to UTC..."
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
-    $ResultText.text = "`r`n" + "Time set to UTC for consistent time in Dual Boot Systems" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $essentialundo.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
-    $ResultText.text = "`r`n" +"`r`n" + "Creating Restore Point and Reverting Settings... Please Wait"
     Enable-ComputerRestore -Drive "C:\"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
@@ -1232,12 +1162,10 @@ $essentialundo.Add_Click({
     # Considered using Invoke-GPUpdate but requires module most people won't have installed
 
     Write-Host "Essential Undo Completed"
-    $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Completed - Ready for next task"
 })
 
 $windowssearch.Add_Click({
     Write-Host "Disabling Bing Search in Start Menu..."
-    $ResultText.text = "`r`n" +"`r`n" + "Disabling Search, Cortana, Start menu search... Please Wait"
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
     <#
     Write-Host "Disabling Cortana"
@@ -1316,7 +1244,6 @@ $windowssearch.Add_Click({
         Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
 
     Write-Host "Search and Start Menu Tweaks Complete"
-    $ResultText.text = "`r`n" +"`r`n" + "Search and Start Menu Tweaks Complete"
     }
 })
 
@@ -1327,7 +1254,6 @@ $backgroundapps.Add_Click({
         Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
     }
     Write-Host "Disabled Background application access"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Background application access"
 })
 
 $cortana.Add_Click({
@@ -1350,7 +1276,6 @@ $cortana.Add_Click({
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -Type DWord -Value 0
     Write-Host "Disabled Cortana"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Cortana"
 })
 
 $Bloatware = @(
@@ -1451,11 +1376,9 @@ $removebloat.Add_Click({
         Get-AppxPackage -Name $Bloat| Remove-AppxPackage
         Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online
         Write-Host "Trying to remove $Bloat."
-        $ResultText.text = "`r`n" +"`r`n" + "Trying to remove $Bloat."
     }
 
     Write-Host "Finished Removing Bloatware Apps"
-    $ResultText.text = "`r`n" +"`r`n" + "Finished Removing Bloatware Apps"
 })
 
 $reinstallbloat.Add_Click({
@@ -1463,12 +1386,10 @@ $reinstallbloat.Add_Click({
 
     foreach ($app in $Bloatware) {
         Write-Output "Trying to add $app"
-        $ResultText.text = "`r`n" +"`r`n" + "Trying to add $app"
         Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers $app).InstallLocation)\AppXManifest.xml"
     }
 
     Write-Host "Finished Reinstalling Bloatware Apps"
-    $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling Bloatware Apps"
 })
 
 $defaultwindowsupdate.Add_Click({
@@ -1482,7 +1403,6 @@ $defaultwindowsupdate.Add_Click({
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -ErrorAction SilentlyContinue
     Write-Host "Enabled driver offering through Windows Update"
-    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Updates to Stock Settings"
 })
 
 $securitywindowsupdate.Add_Click({
@@ -1508,7 +1428,6 @@ $securitywindowsupdate.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
     Write-Host "Disabled driver offering through Windows Update"
-    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Sane Settings"
 })
 
 $actioncenter.Add_Click({
@@ -1519,7 +1438,6 @@ $actioncenter.Add_Click({
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -Type DWord -Value 1
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
     Write-Host "Disabled Action Center"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Action Center"
 })
 
 $performancefx.Add_Click({
@@ -1535,7 +1453,6 @@ $performancefx.Add_Click({
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 0
     Write-Host "Adjusted visual effects for performance"
-    $ResultText.text = "`r`n" +"`r`n" + "Adjusted VFX for performance"
 })
 
 $appearancefx.Add_Click({
@@ -1550,7 +1467,6 @@ $appearancefx.Add_Click({
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAnimations" -Type DWord -Value 1
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 1
-    $ResultText.text = "`r`n" +"`r`n" + "Visual effects are set for appearance (Defaults)"
 })
 
 $onedrive.Add_Click({
@@ -1580,21 +1496,18 @@ $onedrive.Add_Click({
     Remove-Item -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
     Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
     Write-Host "Disabled OneDrive"
-    $ResultText.text = "`r`n" +"`r`n" + "Deleted and Disabled OneDrive"
 })
 
 $darkmode.Add_Click({
     Write-Host "Enabling Dark Mode"
     Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
     Write-Host "Enabled Dark Mode"
-    $ResultText.text = "`r`n" +"`r`n" + "Enabled Dark Mode"
 })
 
 $lightmode.Add_Click({
     Write-Host "Switching Back to Light Mode"
     Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
     Write-Host "Switched Back to Light Mode"
-    $ResultText.text = "`r`n" +"`r`n" + "Enabled Light Mode"
 })
 
 $EActionCenter.Add_Click({
@@ -1602,7 +1515,6 @@ $EActionCenter.Add_Click({
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
-    $ResultText.text = "`r`n" +"`r`n" + "Enabled Action Center"
 })
 
 $ECortana.Add_Click({
@@ -1625,7 +1537,6 @@ $ECortana.Add_Click({
     Write-Host "Restore Windows Search Icon..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1
 	Write-Host "Done - Reverted to Stock Settings"
-    $ResultText.text = "`r`n" +"`r`n" + "Enabled Cortana and Restored Search"
 })
 
 $HTrayIcons.Add_Click({
@@ -1633,7 +1544,6 @@ $HTrayIcons.Add_Click({
 	Write-Host "Hiding tray icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
 	Write-Host "Done - Hid Tray Icons"
-    $ResultText.text = "`r`n" +"`r`n" + "Tray icons are now factory defaults"
 })
 
 
@@ -1642,7 +1552,6 @@ $STrayIcons.Add_Click({
 	Write-Host "Showing tray icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
 	Write-Host "Done - Now showing all tray icons"
-    $ResultText.text = "`r`n" +"`r`n" + "Tray Icons now set to show all"
 })
 
 $EClipboardHistory.Add_Click({
@@ -1650,7 +1559,6 @@ $EClipboardHistory.Add_Click({
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Clipboard" -Name "EnableClipboardHistory" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
-    $ResultText.text = "`r`n" +"`r`n" + "Enabled Clipboard History"
 })
 
 $ELocation.Add_Click({
@@ -1670,7 +1578,6 @@ $ELocation.Add_Click({
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceAllowTheseApps" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceDenyTheseApps" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
-    $ResultText.text = "`r`n" +"`r`n" + "Location Tracking now on... Reboot to check."
 })
 
 $RBackgroundApps.Add_Click({
@@ -1680,7 +1587,6 @@ $RBackgroundApps.Add_Click({
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
 	Write-Host "Done - Reverted to Stock Settings"
-    $ResultText.text = "`r`n" +"`r`n" + "Enabled Background Apps"
 })
 
 $EHibernation.Add_Click({
@@ -1688,14 +1594,12 @@ $EHibernation.Add_Click({
     Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 1
     Write-Host "Done - Reverted to Stock Settings"
-    $ResultText.text = "`r`n" +"`r`n" + "Enabled Hibernation"
 })
 
 $InstallOneDrive.Add_Click({
     Write-Host "Installing Onedrive. Please Wait..."
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
     %systemroot%\SysWOW64\OneDriveSetup.exe
-    $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling OneDrive"
 })
 
 $DisableNumLock.Add_Click({
@@ -1706,7 +1610,6 @@ $DisableNumLock.Add_Click({
         $wsh = New-Object -ComObject WScript.Shell
         $wsh.SendKeys('{NUMLOCK}')
     }
-    $ResultText.text = "`r`n" +"`r`n" + "NUMLOCK Disabled"
 })
 
 $yourphonefix.Add_Click({
@@ -1722,7 +1625,6 @@ $yourphonefix.Add_Click({
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
     Write-Host "You may need to Reboot and right-click Your Phone app and select repair"
-    $ResultText.text = "`r`n" +"`r`n" + "You may need to Reboot and right-click Your Phone app and select repair"
 })
 
 $ncpa.Add_Click({
@@ -1829,7 +1731,6 @@ $windowsupdatefix.Add_Click({
     wuauclt /resetauthorization /detectnow 
     
     Write-Host "Process complete. Please reboot your computer."
-    $ResultText.text = "`r`n" +"`r`n" + "Process complete. Please reboot your computer."
 
 })
 
