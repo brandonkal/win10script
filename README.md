@@ -13,7 +13,7 @@ This script is the culmination of many scripts and gists from github with featur
 ## How to Run
 Paste this command into Powershell (admin):
 ```
-iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/win10debloat.ps1'))
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/brandonkal/win10script/master/win10debloat.ps1'))
 ```
 
 For complete details check out https://christitus.com/debloat-windows-10-2020/
