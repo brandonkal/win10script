@@ -26,7 +26,7 @@ else{
 
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(1050,1000)
-$Form.text                       = "Windows Toolbox By Chris Titus"
+$Form.text                       = "Windows Toolbox By Brandon Kalinowski and Chris Titus"
 $Form.StartPosition              = "CenterScreen"
 $Form.TopMost                    = $false
 $Form.BackColor                  = [System.Drawing.ColorTranslator]::FromHtml("#e9e9e9")
@@ -117,17 +117,21 @@ $vlc.Font                        = New-Object System.Drawing.Font('Microsoft San
 
 $powertoys                       = New-Object system.Windows.Forms.Button
 $powertoys.text                  = "PowerToys"
-$powertoys.width                 = 211
-$powertoys.height                = 30
-$powertoys.location              = New-Object System.Drawing.Point(4,67)
-$powertoys.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$winterminal                     = New-Object system.Windows.Forms.Button
-$winterminal.text                = "Windows Terminal"
-$winterminal.width               = 211
-$winterminal.height              = 30
-$winterminal.location            = New-Object System.Drawing.Point(3,32)
-$winterminal.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$installSophia                    = New-Object system.Windows.Forms.Button
+$installSophia.text                = "Install Sophia (Advanced)"
+$installSophia.width               = 211
+$installSophia.height              = 30
+$installSophia.location            = New-Object System.Drawing.Point(3,32)
+$installSophia.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$essentialtweaks                 = New-Object system.Windows.Forms.Button
+$essentialtweaks.text            = "Essential Tweaks"
+$essentialtweaks.width                 = 211
+$essentialtweaks.height                = 30
+$essentialtweaks.location              = New-Object System.Drawing.Point(4,67)
+$essentialtweaks.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $vscode                          = New-Object system.Windows.Forms.Button
 $vscode.text                     = "Visual Studio Code"
@@ -157,12 +161,7 @@ $Label3.height                   = 25
 $Label3.location                 = New-Object System.Drawing.Point(229,11)
 $Label3.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
-$essentialtweaks                 = New-Object system.Windows.Forms.Button
-$essentialtweaks.text            = "Essential Tweaks"
-$essentialtweaks.width           = 205
-$essentialtweaks.height          = 75
-$essentialtweaks.location        = New-Object System.Drawing.Point(0,17)
-$essentialtweaks.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
+
 
 $backgroundapps                  = New-Object system.Windows.Forms.Button
 $backgroundapps.text             = "Disable Background Apps"
@@ -609,10 +608,8 @@ $Button1.height                  = 30
 $Button1.location                = New-Object System.Drawing.Point(4,197)
 $Button1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
-$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
-$Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
-$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$Button1))
+$Form.controls.AddRange(@($Panel1))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$essentialtweaks,$installSophia.$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
@@ -702,16 +699,11 @@ $urlcreateiso.Add_Click({
     Start-Process "https://youtu.be/R6XPff38iSc"
 })
 
-$winterminal.Add_Click({
-    Write-Host "Installing New Windows Terminal"
-    winget install -e Microsoft.WindowsTerminal | Out-Host
-    if($?) { Write-Host "Installed New Windows Terminal" }
-})
-
-$powertoys.Add_Click({
-    Write-Host "Installing Microsoft PowerToys"
-    winget install -e Microsoft.PowerToys | Out-Host
-    if($?) { Write-Host "Installed Microsoft PowerToys" }
+$installSophia.Add_Click({
+    Write-Host "Installing Sophia Script"
+    Invoke-RestMethod script.sophi.app | Invoke-Expression | Out-Host
+    Start-BitsTransfer -Source "https://github.com/brandonkal/win10script/blob/master/Sophia.ps1" -Destination "$HOME\Downloads\Sophia.ps1"
+    if($?) { Write-Host "Customized Sophia config downloaded. Copy it into the Sophia directory and run the module from there." }
 })
 
 $everythingsearch.Add_Click({

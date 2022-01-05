@@ -6,3 +6,15 @@
 4. Run debloat script
 5. Install apps
 6. Restart and cleanup
+
+
+Buttons:
+Download Sophia
+Optimize
+Tweaks
+Install Apps
+Action on
+Action Off
+Tray on
+Tray Off
+Enable Hybernation
