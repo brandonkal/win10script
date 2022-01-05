@@ -40,8 +40,8 @@ $Form.Width                   = $objImage.Width
 $Form.Height                  = $objImage.Height
 
 $Panel1                          = New-Object system.Windows.Forms.Panel
-$Panel1.height                   = 939
-$Panel1.width                    = 219
+$Panel1.height                   = 200
+$Panel1.width                    = 419
 $Panel1.location                 = New-Object System.Drawing.Point(6,54)
 
 $installSophia                    = New-Object system.Windows.Forms.Button
@@ -80,7 +80,7 @@ $EHibernation.height             = 30
 $EHibernation.location           = New-Object System.Drawing.Point(3,721)
 $EHibernation.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$Form.controls.AddRange(@($Panel1))
+$Form.controls.AddRange(@($Label1,$Panel1))
 $Panel1.controls.AddRange(@($essentialTweaks,$installSophia,$EHybernation))
 
 $installSophia.Add_Click({
