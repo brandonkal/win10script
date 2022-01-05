@@ -1,0 +1,32 @@
+{
+	"$schema": "https://aka.ms/winget-packages.schema.2.0.json",
+	"CreationDate": "2022-01-05T01:16:41.445-00:00",
+	"Sources": [
+	  {
+		"Packages": [
+		  { "PackageIdentifier": "QL-Win.Quicklook" },
+		  { "PackageIdentifier": "7zip.7zip" },
+		  { "PackageIdentifier": "CrystalDewWorld.CrystalDiskMark" },
+		  { "PackageIdentifier": "HandBrake.HandBrake" },
+		  { "PackageIdentifier": "MediaArea.MediaInfo.GUI" },
+		  { "PackageIdentifier": "Microsoft.WindowsTerminal" },
+		  { "PackageIdentifier": "Notepad++.Notepad++" },
+		  { "PackageIdentifier": "ONLYOFFICE.DesktopEditors" },
+		  { "PackageIdentifier": "Parsec.Parsec" },
+		  { "PackageIdentifier": "SumatraPDF.SumatraPDF" },
+		  { "PackageIdentifier": "VideoLAN.VLC" },
+		  { "PackageIdentifier": "VivaldiTechnologies.Vivaldi" },
+		  { "PackageIdentifier": "ZeroTier.ZeroTierOne" },
+		  { "PackageIdentifier": "Bopsoft.Listary" },
+		  { "PackageIdentifier": "Famatech.AdvancedIPScanner" }
+		],
+		"SourceDetails": {
+		  "Argument": "https://winget.azureedge.net/cache",
+		  "Identifier": "Microsoft.Winget.Source_8wekyb3d8bbwe",
+		  "Name": "winget",
+		  "Type": "Microsoft.PreIndexed.Package"
+		}
+	  }
+	],
+	"WinGetVersion": "1.1.13405"
+}
